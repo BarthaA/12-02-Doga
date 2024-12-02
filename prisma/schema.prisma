@@ -17,7 +17,7 @@ model gyerek {
   id         Int     @id @default(autoincrement())
   nev        String
   cim        String
-  viselkedes Boolean @default(false)
+  viselkedes Boolean @default(true)
 
   jatekok    jatek[]
 }
