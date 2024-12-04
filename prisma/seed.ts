@@ -13,13 +13,21 @@ async function main() {
     })
   }
   for (let i = 0; i < 10; i++) {
-    await prisma.gyerek.create({
+    const gyerek = await prisma.gyerek.create({
       data: {
         nev: faker.name.firstName(),
-        cim: faker.address.country() + faker.address.city() + faker.address.streetAddress(),
+        cim: faker.location.country() + faker.location.city() + faker.location.streetAddress(),
         viselkedes: faker.datatype.boolean(),
       },
     })
+    if (gyerek.viselkedes) {
+      await prisma.childrenToToys.create({
+        data: {
+          child_id: gyerek.id,
+          toy_id: faker.number.int({ min: 1, max: 50 })
+        }
+      })
+    }
   }
 }
 

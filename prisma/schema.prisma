@@ -19,6 +19,7 @@ model gyerek {
   cim        String
   viselkedes Boolean @default(true)
 
+  add childrenToToys[]
   jatekok    jatek[]
 }
 
@@ -28,6 +29,16 @@ model jatek {
   anyag      String
   suly       Int
 
+  add childrenToToys[]
   gyerekId   Int?
   gyerek     gyerek?  @relation(fields: [gyerekId], references: [id])
+}
+
+model childrenToToys {
+  id         Int      @id @default(autoincrement())
+  child_id   Int
+  toy_id     Int
+
+  jatekok    jatek @relation(fields: [toy_id], references: [id])
+  gyerekek   gyerek @relation(fields: [child_id], references: [id])
 }

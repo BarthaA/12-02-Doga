@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Res } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Res, Put } from '@nestjs/common';
 import { GyerekService } from './gyerek.service';
 import { CreateGyerekDto } from './dto/create-gyerek.dto';
 import { UpdateGyerekDto } from './dto/update-gyerek.dto';
@@ -34,7 +34,7 @@ export class GyerekController {
     return this.gyerekService.update(id, updateGyerekDto, res);
   }
 
-  @Patch(':id/jatek')
+  @Put(':id/jatek')
   async jatekFelvetel(
     @Param('id') gyerekId: number,
     @Body('jatekId') jatekId: number,
